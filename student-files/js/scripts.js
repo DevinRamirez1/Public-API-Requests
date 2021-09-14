@@ -1,42 +1,35 @@
 //variables
-
-
+const gallery = document.getElementById('gallery');
+const userURL = 'https://randomuser.me/api/?results=12';
 
 //fetch user data fom url
-function fetchUserData(url) {
-    return fetch(url)
+fetch(userURL)
         .then(checkStatus)
         .then(response => response.json())
+        .then(response => response.results)
+        .then(generateUsersHTML)
         .catch(error => console.log('Server error', error))
-        .then(data => console.log(data))
-}
-Promise.all([
-    fetchUserData('https://randomuser.me/api/?results=1')
-])
-.then(data => {
 
 
-})
 
 //Generate each User's gallery card
 function generateUsersHTML(data) {
-    data.map( person => {
-        const gallery = document.getElementById('gallery');
-        if (person.type == 'standard') {
-            gallery.innerHTML = 
-            `<div class="card">
-                <div class="card-img-container">
-                    <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
-                </div>
-            <div class="card-info-container">
-                <h3 id="name" class="card-name cap">${person.name.first} ${person.name.last}</h3>
-                <p class="card-text">${person.email}</p>
-                <p class="card-text cap">${person.city}, ${person.state}</p>
+    data.forEach( (user, index) => {
+        gallery.insertAdjacentHTML('beforeend', 
+        `<div class="card" data-index=${index}>
+            <div class="card-img-container">
+                <img class="card-img" src="${user.picture.large}" alt="profile picture">
             </div>
-        </div>`
-        }
+            <div class="card-info-container">
+                <h3 id="name" class="card-name cap">${user.name.first} ${user.name.last}</h3>
+                <p class="card-text">${user.email}</p>
+                <p class="card-text cap">${user.city}, ${user.state}</p>
+            </div>
+        </div>` );
     })
 }
+
+
 
 //check status of fetched API
 function checkStatus(response) {
@@ -46,10 +39,5 @@ function checkStatus(response) {
         return Promise.reject(new Error(response.statusText))
     }
 }
-
-document.addEventListener('load', () => {
-    generateUsersHTML();
-
-});
 
 
