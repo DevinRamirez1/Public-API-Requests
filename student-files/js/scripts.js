@@ -1,3 +1,6 @@
+//variables
+
+
 
 //fetch user data fom url
 function fetchUserData(url) {
@@ -8,10 +11,10 @@ function fetchUserData(url) {
         .then(data => console.log(data))
 }
 Promise.all([
-    fetchUserData('https://randomuser.me/api/?results=12')
+    fetchUserData('https://randomuser.me/api/?results=1')
 ])
 .then(data => {
-    
+
 
 })
 
@@ -26,15 +29,16 @@ function generateUsersHTML(data) {
                     <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
                 </div>
             <div class="card-info-container">
-                <h3 id="name" class="card-name cap">first last</h3>
-                <p class="card-text">email</p>
-                <p class="card-text cap">city, state</p>
+                <h3 id="name" class="card-name cap">${person.name.first} ${person.name.last}</h3>
+                <p class="card-text">${person.email}</p>
+                <p class="card-text cap">${person.city}, ${person.state}</p>
             </div>
         </div>`
         }
     })
 }
 
+//check status of fetched API
 function checkStatus(response) {
     if (response.ok) {
         return Promise.resolve(response);
@@ -43,5 +47,9 @@ function checkStatus(response) {
     }
 }
 
+document.addEventListener('load', () => {
+    generateUsersHTML();
+
+});
 
 
