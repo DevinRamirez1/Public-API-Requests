@@ -4,13 +4,16 @@ function fetchUserData(url) {
     return fetch(url)
         .then(checkStatus)
         .then(response => response.json())
-        .catch(error => response.json())
+        .catch(error => console.log('Server error', error))
         .then(data => console.log(data))
 }
 Promise.all([
-    fetchUserData('https://randomuser.me/api/?results=5000')
+    fetchUserData('https://randomuser.me/api/?results=12')
 ])
+.then(data => {
+    
 
+})
 
 //Generate each User's gallery card
 function generateUsersHTML(data) {
