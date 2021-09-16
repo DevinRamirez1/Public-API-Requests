@@ -48,7 +48,7 @@ function checkStatus(response) {
 function generateModalBoxHTML(index) {
     const {name, email, location, phone, dob, picture} = users[index];
     
-    gallery.insertAdjacentHTML("beforeend", 
+    gallery.insertAdjacentHTML("afterend", 
         `<div class="modal-container">
                  <div class="modal">
                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
@@ -71,17 +71,34 @@ function generateModalBoxHTML(index) {
                 </div>
             </div>`);
 
-}
+//event listener to close the modal box
+const modalClose = document.getElementById('modal-close-btn');
+modalClose.addEventListener('click', () => {
+    document.body.removeChild(document.body.lastElementChild);
+})
+
 
 //modal variables
-let modalBox = document.getElementsByClassName('modal-container');
-const modalClose = document.getElementById('modal-close-btn');
-const modaleNext = document.getElementById('modal-next');
+const modalButtons = document.getElementsByClassName('modal-btn-container');
+const modalNext = document.getElementById('modal-next');
 const modalPrev = document.getElementById('modal-prev');
 
-modalClose.addEventListener('click', e => {
-    modalBox.remove();
+//event listener for next and prev buttons to switch between employees
+modalButtons.addEventListener('click', e => {
+
+    if (e.target === modalNext && currentIndex < users.length - 1){
+        currentIndex++
+    } else if (e.target === modalNext && currentIndex === users.length - 1){
+        currentIndex = 0
+    } else if (e.target === modalPrev && currentIndex > 0){
+        currentIndex--
+    } else if (e.target === modalPrev && currentIndex === 0){
+        currentIndex = users.length - 1
+    }
+    document.body.removeChild(document.body.lastElementChild);d
+    generateModalBoxHTML(currentIndex);
 })
+}
 
 //event listener to generate modal boxes
 gallery.addEventListener('click', (e) => {
