@@ -44,6 +44,24 @@ function checkStatus(response) {
     }
 }
 
+//format birthday
+function formatDOB(dob) {
+    const year = dob.substring(0,4);
+    const month = dob.substring(5,7)
+    const day = dob.substring(8,10);
+
+    return `${month}/${day}/${year}`;
+}
+
+//format phone number
+function formatPhone(phone){
+    const phoneAreaCode = phone.substring(0,3);
+    const phoneNextThree = phone.substring(5,7);
+    const phoneLastFour = phone.substring(8,11);
+
+    return "(" + phoneAreaCode + ")" + phoneNextThree + "-" + phoneLastFour;
+}
+
 //generate modal box html
 function generateModalBoxHTML(index) {
     const {name, email, location, phone, dob, picture} = users[index];
@@ -58,9 +76,9 @@ function generateModalBoxHTML(index) {
                         <p class="modal-text">${email}</p>
                         <p class="modal-text cap">${location.city}</p>
                         <hr>
-                        <p class="modal-text">${phone}</p>
+                        <p class="modal-text">${phone.cell}</p>
                         <p class="modal-text">${location.street}, ${location.city}, ${location.state} ${location.postcode}</p>
-                        <p class="modal-text">Birthday: ${dob}</p>
+                        <p class="modal-text">Birthday: ${formatDOB(dob.date)}</p>
                     </div>
                 </div>
 
