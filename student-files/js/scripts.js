@@ -73,6 +73,17 @@ function generateModalBoxHTML(index) {
 
 }
 
+//modal variables
+let modalBox = document.getElementsByClassName('modal-container');
+const modalClose = document.getElementById('modal-close-btn');
+const modaleNext = document.getElementById('modal-next');
+const modalPrev = document.getElementById('modal-prev');
+
+modalClose.addEventListener('click', e => {
+    modalBox.remove();
+})
+
+//event listener to generate modal boxes
 gallery.addEventListener('click', (e) => {
     const card = e.target.closest('.card');
     const index = card.getAttribute('data-index');
