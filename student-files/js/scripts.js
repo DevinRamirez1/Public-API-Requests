@@ -53,19 +53,9 @@ function formatDOB(dob) {
     return `${month}/${day}/${year}`;
 }
 
-//format phone number
-function formatPhone(phone){
-    const phoneAreaCode = phone.substring(0,3);
-    const phoneNextThree = phone.substring(5,7);
-    const phoneLastFour = phone.substring(8,11);
-
-    return "(" + phoneAreaCode + ")" + phoneNextThree + "-" + phoneLastFour;
-}
-
 //generate modal box html
 function generateModalBoxHTML(index) {
     const {name, email, location, phone, dob, picture} = users[index];
-    
     gallery.insertAdjacentHTML("afterend", 
         `<div class="modal-container">
                  <div class="modal">
@@ -77,7 +67,7 @@ function generateModalBoxHTML(index) {
                         <p class="modal-text cap">${location.city}</p>
                         <hr>
                         <p class="modal-text">${phone}</p>
-                        <p class="modal-text">${location.street}, ${location.city}, ${location.state} ${location.postcode}</p>
+                        <p class="modal-text">${location.street.number} ${location.street.name}, ${location.city}, ${location.state} ${location.postcode}</p>
                         <p class="modal-text">Birthday: ${formatDOB(dob.date)}</p>
                     </div>
                 </div>
