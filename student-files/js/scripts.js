@@ -76,7 +76,7 @@ function generateModalBoxHTML(index) {
                         <p class="modal-text">${email}</p>
                         <p class="modal-text cap">${location.city}</p>
                         <hr>
-                        <p class="modal-text">${phone.cell}</p>
+                        <p class="modal-text">${phone}</p>
                         <p class="modal-text">${location.street}, ${location.city}, ${location.state} ${location.postcode}</p>
                         <p class="modal-text">Birthday: ${formatDOB(dob.date)}</p>
                     </div>
@@ -91,7 +91,7 @@ function generateModalBoxHTML(index) {
 //event listener to close the modal box
 const modalClose = document.getElementById('modal-close-btn');
 modalClose.addEventListener('click', () => {
-    document.body.removeChild(document.body.lastElementChild);
+    document.querySelector('.modal-container').remove();
 })
 
 
@@ -112,7 +112,7 @@ modalButtons.addEventListener('click', e => {
     } else if (e.target === modalPrev && currentIndex === 0){
         currentIndex = users.length - 1
     }
-    document.body.removeChild(document.body.lastElementChild);
+    document.querySelector('.modal-container').remove();
     generateModalBoxHTML(currentIndex);
 })
 }
