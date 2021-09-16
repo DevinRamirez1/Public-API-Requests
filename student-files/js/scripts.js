@@ -64,7 +64,6 @@ function generateModalBoxHTML(index) {
                     </div>
                 </div>
 
-                // IMPORTANT: Below is only for exceeds tasks 
                 <div class="modal-btn-container">
                     <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
                     <button type="button" id="modal-next" class="modal-next btn">Next</button>
@@ -79,7 +78,7 @@ modalClose.addEventListener('click', () => {
 
 
 //modal variables
-const modalButtons = document.getElementsByClassName('modal-btn-container');
+const modalButtons = document.querySelector('.modal-btn-container');
 const modalNext = document.getElementById('modal-next');
 const modalPrev = document.getElementById('modal-prev');
 
@@ -95,7 +94,7 @@ modalButtons.addEventListener('click', e => {
     } else if (e.target === modalPrev && currentIndex === 0){
         currentIndex = users.length - 1
     }
-    document.body.removeChild(document.body.lastElementChild);d
+    document.body.removeChild(document.body.lastElementChild);
     generateModalBoxHTML(currentIndex);
 })
 }
