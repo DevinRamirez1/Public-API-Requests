@@ -55,7 +55,7 @@ function formatDOB(dob) {
 
 //generate modal box html
 function generateModalBoxHTML(index) {
-    const {name, email, location, phone, dob, picture} = users[index];
+    const {name, email, location, cell, dob, picture} = users[index];
     gallery.insertAdjacentHTML("afterend", 
         `<div class="modal-container">
                  <div class="modal">
@@ -66,7 +66,7 @@ function generateModalBoxHTML(index) {
                         <p class="modal-text">${email}</p>
                         <p class="modal-text cap">${location.city}</p>
                         <hr>
-                        <p class="modal-text">${phone}</p>
+                        <p class="modal-text">${cell}</p>
                         <p class="modal-text">${location.street.number} ${location.street.name}, ${location.city}, ${location.state} ${location.postcode}</p>
                         <p class="modal-text">Birthday: ${formatDOB(dob.date)}</p>
                     </div>
