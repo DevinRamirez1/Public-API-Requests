@@ -4,6 +4,7 @@ const userURL = 'https://randomuser.me/api/?results=12';
 let currentIndex = 0;
 let users = []
 let data
+const searchContainer = document.querySelector('.search-container');
 
 //fetch user data fom url
 fetch(userURL)
@@ -11,6 +12,7 @@ fetch(userURL)
         .then(response => response.json())
         .then(response => response.results)
         .then(generateUsersHTML)
+        .then(generateSearchHTML)
         .catch(error => console.log('Server error', error))
 
 
@@ -27,13 +29,11 @@ function generateUsersHTML(data) {
             <div class="card-info-container">
                 <h3 id="name" class="card-name cap">${user.name.first} ${user.name.last}</h3>
                 <p class="card-text">${user.email}</p>
-                <p class="card-text cap">${user.city}, ${user.state}</p>
+                <p class="card-text cap">${user.location.city}, ${user.location.state}</p>
             </div>
         </div>` );
     })
 }
-
-
 
 //check status of fetched API
 function checkStatus(response) {
@@ -104,6 +104,40 @@ modalButtons.addEventListener('click', e => {
     }
     document.querySelector('.modal-container').remove();
     generateModalBoxHTML(currentIndex);
+})
+}
+
+//generate search bar html
+function generateSearchHTML() {
+    searchContainer.insertAdjacentHTML('beforeend', 
+        `<form action="#" method="get">
+        <input type="search" id="search-input" class="search-input" placeholder="Search...">
+        <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+    </form>`)
+
+    const searchField = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-submit');
+
+//search event listener
+searchContainer.addEventListener('keyup', () => {
+    gallery.innerHTML = "";
+    let searchText = searchField.value.toUpperCase();
+        searchBtn.onclick = () => {
+        searchField.value = '';
+   }
+
+   let results = [];
+    users.forEach(person => {
+        const name = `${person.name.first} ${person.name.last}`;
+        if (name.toLowerCase().includes(searchText.toLowerCase())) {
+            results.push(person);
+        }
+
+    return results;
+})
+
+generateUsersHTML(results);
+
 })
 }
 
