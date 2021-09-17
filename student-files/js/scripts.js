@@ -1,25 +1,29 @@
 //variables
 const gallery = document.getElementById('gallery');
 const userURL = 'https://randomuser.me/api/?results=12';
-let currentIndex = 0;
-let users = []
 let data
+let users = []
+let currentIndex = 0;
+let filteredUsers = "";
 const searchContainer = document.querySelector('.search-container');
 
 //fetch user data fom url
 fetch(userURL)
         .then(checkStatus)
         .then(response => response.json())
-        .then(response => response.results)
-        .then(generateUsersHTML)
-        .then(generateSearchHTML)
+        .then(response => {
+            response.results.map(user => {
+                users.push(user);
+                generateUsersHTML(users);
+            })
+        })
         .catch(error => console.log('Server error', error))
 
 
 
 //Generate each User's gallery card
-function generateUsersHTML(data) {
-    users = data;
+function generateUsersHTML(users) {
+    gallery.innerHTML = "";
     users.forEach( (user, index) => {
         gallery.insertAdjacentHTML('beforeend', 
         `<div class="card" data-index=${index}>
@@ -115,31 +119,33 @@ function generateSearchHTML() {
         <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
     </form>`)
 
-    const searchField = document.getElementById('search-input');
-    const searchBtn = document.getElementById('search-submit');
+ 
+
+}
+
+generateSearchHTML();
+
+const searchField = document.getElementById('search-input');
+const searchBtn = document.getElementById('search-submit');
+
 
 //search event listener
 searchContainer.addEventListener('keyup', () => {
-    gallery.innerHTML = "";
     let searchText = searchField.value.toUpperCase();
         searchBtn.onclick = () => {
         searchField.value = '';
    }
-
-   let results = [];
-    users.forEach(person => {
-        const name = `${person.name.first} ${person.name.last}`;
-        if (name.toLowerCase().includes(searchText.toLowerCase())) {
-            results.push(person);
-        }
-
-    return results;
+//
+const filteredList = users.filter(student => {
+    return (
+       student.name.first.toUpperCase().includes(searchText) ||
+       student.name.last.toUpperCase().includes(searchText)
+    );
+ });
+    filteredUsers = filteredList
+    generateUsersHTML(filteredUsers);
+//
 })
-
-generateUsersHTML(results);
-
-})
-}
 
 //event listener to generate modal boxes
 gallery.addEventListener('click', (e) => {
