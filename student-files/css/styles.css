@@ -16,7 +16,7 @@ html, body {
 body {
     font-family: "Nunito", sans-serif;
     text-align: center;
-    background: rgba(235, 235, 235, 0.9);
+    background: rgba(143, 111, 111, 0.9);
 }
 
 header {
@@ -30,7 +30,7 @@ header {
 
 header h1 {
     font-size: 1.25em;
-    color: rgba(50, 50, 50, 0.9);
+    color: rgba(255, 255, 255, 0.9);
     margin-top: 35px;
 }
 
@@ -85,7 +85,7 @@ header h1 {
     max-width: 360px;
     margin: 10px 10px 20px;
     padding: 10px;
-    background: rgba(245, 245, 245, 0.9);
+    background: rgba(72, 231, 252, 0.9);
     border-radius: 0.25em;
     border: 1px solid rgba(50, 50, 50, 0.3);
     transition: .4s ease-out;
@@ -138,7 +138,7 @@ header h1 {
     min-height: 415px;
     margin: 10px auto auto;
     padding-bottom: 15px;
-    background: rgba(255, 255, 255, 1);
+    background: rgb(167, 162, 162);
     border-radius: 0.25em;
     border: 1px solid rgba(100, 100, 100, 0.3);
     transition: .4s ease-out;
@@ -150,7 +150,7 @@ header h1 {
     right: 15px;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.9);
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(63, 59, 59, 0.8);
     border-radius: 0.25em;
     border: 1px solid rgba(50, 50, 50, 0.3);
 }
@@ -185,7 +185,7 @@ header h1 {
     max-width: 420px;
     padding: 10px 15px 15px;;
     margin: 10px auto auto;
-    background: rgba(255, 255, 255, 1);
+    background: rgb(167, 162, 162);
     border-radius: 0.25em;
     border: 1px solid rgba(100, 100, 100, 0.3);
 }
@@ -196,9 +196,9 @@ header h1 {
     cursor: pointer;
     font-size: 0.85em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(5, 5, 5, 0.9);
     padding: 0.75em 1.5em;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(72, 231, 252, 0.9);
     border-radius: 0.35em;
     transition: .4s ease-out;
   }
